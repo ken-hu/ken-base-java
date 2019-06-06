@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * <b><code>InsertSort</code></b>
  * <p/>
- * Description:
+ * Description: 直接插入排序
  * <p/>
  * <b>Creation Time:</b> 2019/6/5 21:50.
  *
