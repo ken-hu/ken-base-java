@@ -2,7 +2,7 @@
 
 #### 介绍
 1. 【hui-base-hadoop】大数据hadoop相关
-
+2. 【hui-base-thread】java多线程例子
 
 #### 软件架构
 软件架构说明
@@ -15,6 +15,9 @@
 3. xxxx
 
 #### 使用说明
+
+
+#### Blog
  1. 【HIVE-JDBC】com.hui.bigdata.hadoop.hive.HiveJDBC   
  blog: https://blog.csdn.net/HuHui_/article/details/84261775
  2. 【HDFS-JAVA】com.hui.bigdata.hadoop.hdfs.HDFSTest <br>
