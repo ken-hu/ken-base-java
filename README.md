@@ -3,6 +3,7 @@
 #### 介绍
 1. 【hui-base-hadoop】大数据hadoop相关
 2. 【hui-base-thread】java多线程例子
+3. 【hui-base-design】java设计模式例子
 
 #### 软件架构
 软件架构说明
