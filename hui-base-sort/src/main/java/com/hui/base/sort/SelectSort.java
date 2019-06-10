@@ -24,25 +24,24 @@ public class SelectSort {
 
     /**
      * 选择排序
-     * 在要排序的一组数中，
-     * 选出最小的一个数与第一个位置的数交换；
-     * 然后在剩下的数当中再找最小的与第二个位置的数交换，
-     * 如此循环到倒数第二个数和最后一个数比较为止
+     * 从未排序序列中，找到关键字最小的元素
+     * 如果最小元素不是未排序序列的第一个元素，将其和未排序序列第一个元素互换
+     * 重复1、2步，直到排序结束。
      */
     public static void selectSort(int arry[]) {
         for (int i = 0; i < arry.length; i++) {
             //待确定的位置
-            int k = i;
+            int min = i;
             //选择出应该在第i个位置的数
-            for (int j = arry.length - 1; j > i; j--) {
-                if (arry[j] < arry[k]) {
-                    k = j;
+            for (int j = i + 1; j < arry.length; j++) {
+                if (arry[j] < arry[min]) {
+                    min = j;
                 }
             }
             //交换两个数
             int temp = arry[i];
-            arry[i] = arry[k];
-            arry[k] = temp;
+            arry[i] = arry[min];
+            arry[min] = temp;
         }
     }
 }

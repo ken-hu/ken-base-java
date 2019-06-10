@@ -3,7 +3,7 @@ package com.hui.base.sort;
 /**
  * <b><code>MergeSort</code></b>
  * <p/>
- * Description
+ * Description 归并排序
  * <p/>
  * <b>Creation Time:</b> 2019/6/6 17:05.
  *

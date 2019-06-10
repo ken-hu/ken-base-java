@@ -3,7 +3,7 @@ package com.hui.base.sort;
 /**
  * <b><code>ShellSort</code></b>
  * <p/>
- * Description
+ * Description 希尔排序
  * <p/>
  * <b>Creation Time:</b> 2019/6/6 16:52.
  *
@@ -20,7 +20,6 @@ public class ShellSort {
      * 待整个序列中的记录“基本有序”时，
      * 再对全体记录进行依次直接插入排序。
      */
-    public static void shellSort(){
-
+    public static void shellSort(int arry[]) {
     }
 }
