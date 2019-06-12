@@ -4,7 +4,7 @@ package com.hui.base.search;
 /**
  * <b><code>BinarySearch</code></b>
  * <p/>
- * Description:
+ * Description:二分查找（折半查找）
  * <p/>
  * <b>Creation Time:</b> 2019/6/11 21:06.
  *
@@ -19,6 +19,13 @@ public class BinarySearch {
         System.out.println(i);
     }
 
+    /**
+     * 二分查找 （折半查找）
+     *
+     * @param arry
+     * @param key
+     * @return
+     */
     private static int binarySearch(int arry[], int key) {
         int low, mid, high;
         low = 0;

@@ -19,6 +19,12 @@ public class OrderSearch {
     }
 
 
+    /**
+     * 顺序查找
+     * @param arry
+     * @param key
+     * @return
+     */
     public static int orderSearch(int arry[], int key) {
         for (int i = 0; i < arry.length; i++) {
             if (arry[i] == key){

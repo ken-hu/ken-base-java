@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class InsertSort {
 
     public static void main(String[] args) {
-        int arry[] = {54, 23, 96, 075, 01, 7438, 9};
+        int arry[] = {54, 23, 96, 75, 1, 7438, 9};
 
         insertSort(arry);
 
