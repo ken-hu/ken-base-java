@@ -30,19 +30,6 @@ public class DateUtil {
     private static final String DATE_FORMAT_4 = "yyyyMMddHHmm";
 
 
-
-    private static String yesterday;
-    private static String tomorrow;
-    private static String dealDate;
-    private static int dealDateHour;
-    private static String twoHourAgoDate;
-    private static int twoHourAgoHour;
-    private static String oneHourAgoDate;
-    private static int oneHourAgoHour;
-    private static String twoHourAfterDate;
-    private static int twoHourAfterHour;
-    private static String lastMonth;
-
     private static ThreadLocal<Map<String, SimpleDateFormat>> threadLocalMap = new ThreadLocal<Map<String, SimpleDateFormat>>() {
         @Override
         protected Map<String, SimpleDateFormat> initialValue() {
