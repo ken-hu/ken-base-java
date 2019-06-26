@@ -1,4 +1,4 @@
-package com.hui.base.common.ftp.util;
+package com.hui.base.common.util.ftp;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.net.ftp.FTPClient;
@@ -54,7 +54,7 @@ public class FtpUtil {
      * @param destPath   the dest path
      * @return the boolean
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static boolean downLoadFile(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
         try {
@@ -75,7 +75,7 @@ public class FtpUtil {
 
             for (FTPFile ftpFile : ftpFiles) {
                 if (ftpFile.getName().equals(fileName)) {
-                    String destFilePath = destPath + fileName;
+                    String destFilePath = destPath + "/"+fileName;
                     log.info(destFilePath);
 
                     File file = new File(destFilePath);
@@ -103,7 +103,7 @@ public class FtpUtil {
      * @param destPath   the dest path
      * @return the boolean
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static boolean batchDownloadFile(FTPClient ftpClient, String sourcePath, String destPath) {
         try {
@@ -142,7 +142,7 @@ public class FtpUtil {
      * @param fileName   the source file name
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static boolean uploadFile(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
         String sourceFilePath = sourcePath + "/" + fileName;
@@ -175,7 +175,7 @@ public class FtpUtil {
      * @param sourcePath the source path
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static void batchUploadFile(FTPClient ftpClient, String sourcePath, String destPath) {
         try {
@@ -208,7 +208,7 @@ public class FtpUtil {
      * @param ftpClient the ftp client
      * @param destPath  the dest path
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static void deleteFiles(FTPClient ftpClient, String destPath) {
 
@@ -237,7 +237,7 @@ public class FtpUtil {
      * @param sourcePath the source path
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static void batchMoveFileToDir(FTPClient ftpClient, String sourcePath, String destPath) {
         try {
@@ -271,7 +271,7 @@ public class FtpUtil {
      * @param sourcePath the source path
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static void moveFileToDir(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
         try {
@@ -308,7 +308,7 @@ public class FtpUtil {
      * @param password the password
      * @return the ftp client
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static FTPClient login(String host, Integer port, String userName, String password) {
         try {
@@ -334,7 +334,7 @@ public class FtpUtil {
      * 关闭连接.
      *
      * @author : Hu weihui
-     * @since hui_project v1
+     * @since nile -cmszbs-szcst 0.1.0
      */
     public static void closeConnect(FTPClient ftpClient) {
         if (ftpClient != null && ftpClient.isConnected()) {

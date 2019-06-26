@@ -1,4 +1,4 @@
-package com.hui.base.common.ftp.util;
+package com.hui.base.common.util.ftp;
 
 import lombok.Data;
 import org.apache.commons.net.ftp.FTPClient;

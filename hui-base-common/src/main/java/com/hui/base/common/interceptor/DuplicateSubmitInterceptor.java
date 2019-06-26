@@ -2,8 +2,8 @@ package com.hui.base.common.interceptor;
 
 import com.google.common.cache.Cache;
 import com.hui.base.common.annotations.AvoidDuplicateFormToken;
-import com.hui.base.common.ftp.enumeration.FormTokenExceptionEnum;
-import com.hui.base.common.ftp.exception.FormTokenException;
+import com.hui.base.common.exception.FormTokenExceptionEnum;
+import com.hui.base.common.exception.FormTokenException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

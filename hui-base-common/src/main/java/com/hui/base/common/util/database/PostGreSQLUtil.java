@@ -1,4 +1,4 @@
-package com.hui.base.common.database;
+package com.hui.base.common.util.database;
 
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.copy.CopyManager;
@@ -37,9 +37,9 @@ public class PostGreSQLUtil {
             CopyManager copyManager = new CopyManager((BaseConnection) connection.getMetaData().getConnection());
             String sql = "";
             if (StringUtils.isEmpty(columnInfo)) {
-                sql = String.format("COPY %s FROM STDIN WITH CSV", tableName);
+                sql = String.format("COPY %s FROM STDIN WITH CSV HEADER ENCODING 'UTF8", tableName);
             } else {
-                sql = String.format("COPY %s (%s) FROM STDIN WITH CSV", tableName, columnInfo);
+                sql = String.format("COPY %s (%s) FROM STDIN WITH CSV HEADER ENCODING 'UTF8", tableName, columnInfo);
             }
             copyManager.copyIn(sql, fileInputStream);
         } catch (FileNotFoundException e) {

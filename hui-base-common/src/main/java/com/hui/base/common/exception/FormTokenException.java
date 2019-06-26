@@ -1,7 +1,5 @@
-package com.hui.base.common.ftp.exception;
+package com.hui.base.common.exception;
 
-
-import com.hui.base.common.ftp.enumeration.FormTokenExceptionEnum;
 
 /**
  * <b><code>FormTokenException</code></b>

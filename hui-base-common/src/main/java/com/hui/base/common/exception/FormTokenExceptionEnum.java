@@ -1,4 +1,4 @@
-package com.hui.base.common.ftp.enumeration;
+package com.hui.base.common.exception;
 
 import com.hui.base.common.constant.ErrorConstant;
 import lombok.Getter;

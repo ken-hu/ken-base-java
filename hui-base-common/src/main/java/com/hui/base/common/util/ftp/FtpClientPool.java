@@ -1,4 +1,4 @@
-package com.hui.base.common.ftp.util;
+package com.hui.base.common.util.ftp;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
