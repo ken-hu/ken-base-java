@@ -1,4 +1,4 @@
-package com.hui.base.thread.count;
+package com.hui.base.thread.atomic;
 
 import com.hui.base.thread.annotations.ThreadSafe;
 import lombok.Getter;

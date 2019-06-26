@@ -1,4 +1,4 @@
-package com.hui.base.thread.count;
+package com.hui.base.thread.atomic;
 
 import com.hui.base.thread.annotations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <b><code>com.hui.base.thread.ConcurrencyTest</code></b>
@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 @Slf4j
 @ThreadSafe
-public class AtomicBooleanExample {
+public class AtomicIntegerExample {
 
     //请求总数
     public static int clientTotal = 5000;
@@ -29,7 +29,7 @@ public class AtomicBooleanExample {
     //线程数
     public static int threadCount = 200;
 
-    public static AtomicBoolean isHappend = new AtomicBoolean(false);
+    public static AtomicInteger count = new AtomicInteger(0);
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -39,7 +39,7 @@ public class AtomicBooleanExample {
             executorService.execute(()->{
                 try {
                     semaphore.acquire();
-                    switchTest();
+                    add();
                     semaphore.release();
                 } catch (InterruptedException e) {
                     log.error(e.getMessage());
@@ -49,12 +49,10 @@ public class AtomicBooleanExample {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info(" is Happend ? {}",isHappend.get());
+        log.info("com.hui.base.thread.count is {}",count);
     }
 
-    private static void switchTest(){
-        if (isHappend.compareAndSet(false,true)){
-            log.info("finish the work , change the switch");
-        }
+    private static void add(){
+        count.incrementAndGet();
     }
 }
