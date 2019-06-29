@@ -16,12 +16,13 @@
         <module>hui-base-spark</module>
         <module>hui-base-sort</module>
         <module>hui-base-redis</module>
+        <module>hui-base-elasticsearch</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
+        <version>2.1.6.RELEASE</version>
     </parent>
 
     <properties>

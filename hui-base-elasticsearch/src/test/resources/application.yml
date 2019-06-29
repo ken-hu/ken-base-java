@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.89.4:9200
+      cluster-name: elasticsearch
+      repositories:
+        enabled: true
+      properties:
+        path:
+          logs: ./elasticsearch/log
+          data: ./elasticsearch/data
+# ----
