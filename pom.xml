@@ -15,6 +15,7 @@
         <module>hui-base-hadoop</module>
         <module>hui-base-spark</module>
         <module>hui-base-sort</module>
+        <module>hui-base-redis</module>
     </modules>
 
     <parent>
