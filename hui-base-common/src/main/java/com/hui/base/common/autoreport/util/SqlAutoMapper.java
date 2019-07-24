@@ -1,8 +1,3 @@
-/*
- * 广州丰石科技有限公司拥有本软件版权2018并保留所有权利。
- * Copyright 2018, Guangzhou Rich Stone Data Technologies Company Limited,
- * All rights reserved.
- */
 package com.hui.base.common.autoreport.util;
 
 import org.apache.ibatis.builder.StaticSqlSource;
