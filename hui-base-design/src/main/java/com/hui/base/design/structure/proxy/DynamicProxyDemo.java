@@ -8,7 +8,7 @@ import java.lang.reflect.Proxy;
 /**
  * <b><code>DynamicProxy</code></b>
  * <p/>
- * Description
+ * Description 动态代理DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 16:01.
  *

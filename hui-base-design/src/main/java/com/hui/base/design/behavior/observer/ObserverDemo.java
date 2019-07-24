@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * <b><code>ObserverDemo</code></b>
  * <p/>
- * Description
+ * Description 观察者模式DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 16:33.
  *

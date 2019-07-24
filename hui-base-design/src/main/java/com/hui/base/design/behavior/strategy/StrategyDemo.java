@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * <b><code>StrategyDemo</code></b>
  * <p/>
- * Description
+ * Description 策略模式DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 16:48.
  *
@@ -17,7 +17,7 @@ public class StrategyDemo {
     //客户端
     public static void main(String[] args) {
 
-        Context context = new Context(new ConcereteStrategyA());
+        Context context = new Context(new ConcreteStrategyA());
         context.execute();
 
     }
@@ -49,7 +49,7 @@ public class StrategyDemo {
     /**
      * 具体策略A
      */
-    static class ConcereteStrategyA implements Strategy{
+    static class ConcreteStrategyA implements Strategy{
 
         @Override
         public void execute() {

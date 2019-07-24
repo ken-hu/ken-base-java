@@ -3,8 +3,7 @@ package com.hui.base.design.create.simplefactory;
 /**
  * <b><code>SimpleFactoryDemo</code></b>
  * <p/>
- * Description 简单工厂
- * 1. 为了能都写在一个类容易看且在main函数运行，才把类加上static参数
+ * Description 简单工厂模式DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 9:39.
  *

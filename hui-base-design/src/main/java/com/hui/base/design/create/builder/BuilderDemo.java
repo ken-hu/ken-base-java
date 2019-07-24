@@ -8,7 +8,7 @@ import lombok.ToString;
 /**
  * <b><code>BuilderDemo</code></b>
  * <p/>
- * Description
+ * Description 建造者模式DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 10:42.
  *

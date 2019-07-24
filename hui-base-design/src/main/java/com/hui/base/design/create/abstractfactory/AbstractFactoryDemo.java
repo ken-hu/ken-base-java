@@ -3,7 +3,7 @@ package com.hui.base.design.create.abstractfactory;
 /**
  * <b><code>AbstractFactoryDemo</code></b>
  * <p/>
- * Description
+ * Description 抽象工厂模式DEMO
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 10:29.
  *
