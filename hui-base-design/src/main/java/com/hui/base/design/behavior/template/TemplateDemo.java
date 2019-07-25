@@ -22,6 +22,9 @@ public class TemplateDemo {
         template.templateMeth();
     }
 
+    /**
+     * 模板类，提供一个模板方法
+     */
      static abstract class Template{
         final void templateMeth(){
             method1();
@@ -45,6 +48,9 @@ public class TemplateDemo {
     }
 
 
+    /**
+     * 具体模板类A
+     */
     static class ConcreteClassA extends Template{
 
         @Override
@@ -53,6 +59,9 @@ public class TemplateDemo {
         }
     }
 
+    /**
+     * 具体模板类B
+     */
     static class ConcreteClassB extends Template{
 
         @Override
