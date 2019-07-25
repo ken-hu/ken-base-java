@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * <b><code>FlyweightDemo</code></b>
  * <p/>
- * Description:
+ * Description: 享元模式
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 23:17.
  *
@@ -20,18 +20,18 @@ public class FlyweightDemo {
 
         FlyweightFactory factory = new FlyweightFactory();
 
-        factory.addFlyweight("a",new ConcreteFlyweightA("a"));
-        factory.addFlyweight("a1",new ConcreteFlyweightA("a1"));
-        factory.addFlyweight("b",new ConcreteFlyweightB("b"));
-        factory.addFlyweight("b1",new ConcreteFlyweightB("b1"));
-
-
         Flyweight a = factory.getFlyweight("a");
-        Flyweight a1 = factory.getFlyweight("a1");
-        Flyweight b = factory.getFlyweight("b");
-        Flyweight b1 = factory.getFlyweight("b1");
+        a.operation(new UnsharedConcreteFlyweight("access a x1"));
 
-        a.operation(new UnsharedConcreteFlyweight(""));
+        Flyweight a1 = factory.getFlyweight("a");
+        a1.operation(new UnsharedConcreteFlyweight("access a x2"));
+
+        Flyweight a2 = factory.getFlyweight("a");
+        a2.operation(new UnsharedConcreteFlyweight("access a x3"));
+
+        Flyweight b = factory.getFlyweight("b");
+        b.operation(new UnsharedConcreteFlyweight("access b!"));
+
     }
 
     /**
@@ -44,33 +44,16 @@ public class FlyweightDemo {
     /**
      * 具体享元角色A
      */
-    static class ConcreteFlyweightA implements Flyweight {
+    static class ConcreteFlyweight implements Flyweight {
         private String key;
 
-        public ConcreteFlyweightA(String key) {
+        public ConcreteFlyweight(String key) {
             this.key = key;
         }
 
         @Override
         public void operation(UnsharedConcreteFlyweight unsharedConcreteFlyweight) {
-
-        }
-    }
-
-    /**
-     * 具体享元角色B
-     */
-    static class ConcreteFlyweightB implements Flyweight {
-        private String key;
-
-
-        public ConcreteFlyweightB(String key) {
-            this.key = key;
-        }
-
-        @Override
-        public void operation(UnsharedConcreteFlyweight unsharedConcreteFlyweight) {
-
+            System.out.println("享元角色"+key + "被调用");
         }
     }
 
@@ -83,15 +66,19 @@ public class FlyweightDemo {
         public Flyweight getFlyweight(String key) {
 
             Flyweight flyweight = (Flyweight) flyweightMap.get(key);
-            if (null != flyweight) {
+            if (flyweightMap.containsKey(key)) {
                 System.out.println("具体享元" + key + "已经存在，被成功获取！");
+                return flyweightMap.get(key);
+            }else {
+                System.out.println("具体享元" + key + "被创建");
+
+                Flyweight newFlyweight = new ConcreteFlyweight(key);
+                flyweightMap.put(key, newFlyweight);
+                return newFlyweight;
             }
-            return flyweightMap.get(key);
+
         }
 
-        public void addFlyweight(String key, Flyweight flyweight) {
-            flyweightMap.put(key, flyweight);
-        }
     }
 
 
