@@ -1,4 +1,4 @@
-package com.hui.base.design.create.simplefactory;
+package com.hui.base.design.create.factory;
 
 /**
  * <b><code>SimpleFactoryDemo</code></b>
