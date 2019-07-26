@@ -1,5 +1,7 @@
 package com.hui.base.design.create.singleton;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * <b><code>DoubleCheckSingleton</code></b>
  * <p/>
@@ -11,7 +13,17 @@ package com.hui.base.design.create.singleton;
  * @author Hu-Weihui
  * @since hui-base-design-pattern ${PROJECT_VERSION}
  */
+@Slf4j
 public class DoubleCheckSingleton {
+
+    //Client
+    public static void main(String[] args) {
+        DoubleCheckSingleton instance = DoubleCheckSingleton.getInstance();
+        DoubleCheckSingleton instance2 = DoubleCheckSingleton.getInstance();
+
+        log.info("{}",instance == instance2);
+
+    }
     /**
      * volatile（java5）：可以保证多线程下的可见性;
      * 读volatile：每当子线程某一语句要用到volatile变量时，都会从主线程重新拷贝一份，这样就保证子线程的会跟主线程的一致。
