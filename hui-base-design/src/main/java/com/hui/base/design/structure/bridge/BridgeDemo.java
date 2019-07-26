@@ -1,5 +1,7 @@
 package com.hui.base.design.structure.bridge;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * <b><code>BridgeDemo</code></b>
  * <p/>
@@ -9,25 +11,78 @@ package com.hui.base.design.structure.bridge;
  *
  * @author HuWeihui
  */
+@Slf4j
 public class BridgeDemo {
 
-    static abstract class Abstraction{
-
+    //Client
+    public static void main(String[] args) {
+        Implementor implementor = new ConcreteImplementorA();
+        Abstraction abstraction = new RefinedAbstraction(implementor);
+        abstraction.operation();
     }
 
-    interface Implementor{
+    /**
+     * 实现化角色
+     * 举例 文字
+     */
+    static abstract class Abstraction {
+        protected Implementor implementor;
 
+        protected Abstraction(Implementor implementor) {
+            this.implementor = implementor;
+        }
+
+        public abstract void operation();
     }
 
-    static class ConcreteImplementorA{
+    /**
+     * 扩展化角色
+     * 举例 正楷
+     */
+    static class RefinedAbstraction extends Abstraction {
 
+        protected RefinedAbstraction(Implementor implementor) {
+            super(implementor);
+        }
+
+        @Override
+        public void operation() {
+            log.info("字体-> 正楷");
+            implementor.operation();
+        }
     }
 
-    static class ConcreteImplementorB{
-
+    /**
+     * 抽象是实现化角色
+     * 字体颜色
+     */
+    interface Implementor {
+        void operation();
     }
 
-    static class RefinedAbstraction extends Abstraction{
+    /**
+     * 具体 实现化角色A
+     * 绿色
+     */
+    static class ConcreteImplementorA implements Implementor {
 
+        @Override
+        public void operation() {
+            log.info("字体 + 绿色");
+        }
     }
+
+    /**
+     * 具体 实现化角色B
+     * 红色
+     */
+    static class ConcreteImplementorB implements Implementor {
+
+        @Override
+        public void operation() {
+            log.info("+红色");
+        }
+    }
+
+
 }

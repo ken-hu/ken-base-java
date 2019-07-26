@@ -28,8 +28,8 @@ public class ObjectDapterDemo {
     }
 
     /**
-     * 适配器
-     * 举例 这是一个安卓头适配器
+     * 适配者
+     * 举例 这是一个安卓头
      */
     static class Adapter{
         public void adapterRequest(){
@@ -40,6 +40,7 @@ public class ObjectDapterDemo {
 
     /**
      * 对象适配器
+     * 举例 转接头   ust->转接头->安卓头
      */
     static class ObjectAdapter implements Target{
         private Adapter adapter;

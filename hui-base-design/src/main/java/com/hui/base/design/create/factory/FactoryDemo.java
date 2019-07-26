@@ -1,7 +1,7 @@
-package com.hui.base.design.create.abstractfactory;
+package com.hui.base.design.create.factory;
 
 /**
- * <b><code>AbstractFactoryDemo</code></b>
+ * <b><code>FactoryDemo</code></b>
  * <p/>
  * Description 抽象工厂模式DEMO
  * <p/>
@@ -10,7 +10,7 @@ package com.hui.base.design.create.abstractfactory;
  * @author Hu-Weihui
  * @since hui-base-java ${PROJECT_VERSION}
  */
-public class AbstractFactoryDemo {
+public class FactoryDemo {
     //客户端
     public static void main(String[] args) {
         AbstractFactory abstractFactory = null;
