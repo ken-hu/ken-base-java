@@ -4,6 +4,7 @@ package com.hui.base.design.structure.proxy;
  * <b><code>StaticProxy</code></b>
  * <p/>
  * Description 静态代理DEMO
+ *
  * <p/>
  * <b>Creation Time:</b> 2019/7/24 15:14.
  *
