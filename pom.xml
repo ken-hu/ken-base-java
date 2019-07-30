@@ -17,6 +17,7 @@
         <module>hui-base-sort</module>
         <module>hui-base-redis</module>
         <module>hui-base-elasticsearch</module>
+        <module>hui-base-mq</module>
     </modules>
 
     <parent>

@@ -50,7 +50,7 @@ public class GobalExceptionHandler {
      * 校验异常处理. 400
      * 配合Hibernate validate 校验GET方法Controller传入的参数
      * @param e the exception result
-     * @return the response entity
+     * @return the response model
      * @author : Hu weihui
      * @since hui_project v1
      */
@@ -66,7 +66,7 @@ public class GobalExceptionHandler {
      * 校验异常处理. 400
      * 没有开启bindResult切面的时候可以使用这个，但是controller还有重复代码
      * @param e the exception result
-     * @return the response entity
+     * @return the response model
      * @author : Hu weihui
      * @since hui_project v1
      */
