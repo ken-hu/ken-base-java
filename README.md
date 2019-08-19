@@ -10,8 +10,23 @@
 7. 【hui-base-spark】大数据spark相关
 8. 【hui-base-thread】java多线程例子
 
+## 使用说明
+【hui-base-common】里面有很多工具类和一些COMMON类，大多数是web相关
+1. 自动化报告
+2. 单节点的防止表单重复提交
+3. 全局异常处理
+4. ftp工具类
+5. 经纬度向外扩展工具类
+6. Controller返回VO工具类
+7. Postgresql文件入库工具
+8. 日期转换Converter
+9. 日志切面
+...
+....
+.....etc
+
 ## BLOG
-#### 【hui-base-common】
+### 【hui-base-common】
 1. [POI实现动态模板构建PPT](https://ithuhui.com/2018/10/24/common-poi-dynamic-ppt-build/)
 2. [Postgresql数据导入&导出工具类](https://ithuhui.com/2018/12/20/common-postgresql-import-export-util/)
 3. [springboot-aop-日志记录](https://ithuhui.com/2018/12/14/springboot-aop-log/)
@@ -19,7 +34,7 @@
 5. [springboot-防止表单重复提交(单节点&前后端分离)](https://ithuhui.com/2018/12/04/springboot-avoid-duplicate-submit/)
 
 
-#### 【hui-base-hadoop】
+### 【hui-base-hadoop】
  1. [Hadoop-HDFS-JavaAPI手册](https://ithuhui.com/2018/11/07/hadoop-hdfs-common-java-api/)
  2. [Hadoop完全分布式集群搭建](https://ithuhui.com/2018/11/11/hadoop-cluster-build/)
  3. [Hadoop-Hive-环境搭建](https://ithuhui.com/2018/11/18/hadoop-hive-build/)
