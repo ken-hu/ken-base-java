@@ -1,0 +1,14 @@
+# ------------------------
+## 基础配置
+server:
+  port: 8080
+
+## -----------------------
+# 日志打印
+logging:
+  pattern:
+    console: "%date{HH:mm:ss.SSS} [%thread]-%-5level %-30.30logger{29} : %msg%n"
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: DEBUG
+
+
