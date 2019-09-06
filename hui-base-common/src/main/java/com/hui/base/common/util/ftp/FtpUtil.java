@@ -48,157 +48,120 @@ public class FtpUtil {
     /**
      * 下载单个文件.
      *
-     * @param ftpClient  the ftp client
-     * @param sourcePath the file path
-     * @param fileName   the file name
-     * @param destPath   the dest path
+     * @param ftpClient the ftp client
+     * @param srcPath   the file path
+     * @param fileName  the file name
+     * @param destPath  the dest path
      * @return the boolean
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static boolean downLoadFile(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
+    public static void download(FTPClient ftpClient, String srcPath, String fileName, String destPath) {
         try {
-            if (!ftpClient.changeWorkingDirectory(sourcePath)) {
-                log.info("[FtpUtil] {} 该目录不存在", sourcePath);
-                return false;
-            }
-
-            ftpClient.enterLocalPassiveMode();  // 设置被动模式，开通一个端口来传输数据
-
-            String[] fileArry = ftpClient.listNames();
-            if (fileArry == null || fileArry.length == 0) {
-                log.info("[FtpUtil] {} 目录下为空", sourcePath);
-                return false;
-            }
-
             FTPFile[] ftpFiles = ftpClient.listFiles();
+            enterDir(ftpClient, srcPath);
+            checkDirExist(destPath);
 
             for (FTPFile ftpFile : ftpFiles) {
                 if (ftpFile.getName().equals(fileName)) {
-                    String destFilePath = destPath + "/"+fileName;
-                    log.info(destFilePath);
-
+                    String destFilePath = destPath + "/" + fileName;
                     File file = new File(destFilePath);
-                    try(FileOutputStream fileOutputStream = new FileOutputStream(file)){
+                    try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
                         ftpClient.retrieveFile(ftpFile.getName(), fileOutputStream);
                         break;
                     }
-
                 }
             }
         } catch (IOException e) {
-            log.debug("[FtpUtil] download fail ,{}", e);
-            closeConnect(ftpClient);
-            return false;
+            log.error("ftp download file fail !!!", e);
+            throw new RuntimeException("ftp download file fail !!!");
         }
-        return true;
     }
 
 
     /**
      * 批量下载文件.
      *
-     * @param ftpClient  the ftp client
-     * @param sourcePath the source path
-     * @param destPath   the dest path
+     * @param ftpClient the ftp client
+     * @param srcPath   the source path
+     * @param destPath  the dest path
      * @return the boolean
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static boolean batchDownloadFile(FTPClient ftpClient, String sourcePath, String destPath) {
+    public static void batchDownload(FTPClient ftpClient, String srcPath, String destPath) {
         try {
-            ftpClient.enterLocalPassiveMode();
-            if (!ftpClient.changeWorkingDirectory(sourcePath)) {
-                log.info("[FtpUtil] {} 该目录不存在", sourcePath);
-                return false;
-            }
+            enterDir(ftpClient, srcPath);
+            checkDirExist(destPath);
 
-            String[] fileArry = ftpClient.listNames();
-            if (fileArry == null || fileArry.length == 0) {
-                log.info("[FtpUtil] {} 目录下为空", sourcePath);
-                return false;
-            }
-            for (String fileName : fileArry) {
-                String ftpName = new String(fileName.getBytes(serverCharset), localCharset);
-                File file = new File(destPath + '/' + ftpName);
-                FileOutputStream outputStream = new FileOutputStream(file);
-                ftpClient.retrieveFile(fileName, outputStream);
-                outputStream.close();
+            FTPFile[] ftpFiles = ftpClient.listFiles();
+            for (FTPFile ftpFile : ftpFiles) {
+                File file = new File(destPath + File.separator + ftpFile.getName());
+                try (FileOutputStream outputStream = new FileOutputStream(file);
+                ) {
+                    ftpClient.retrieveFile(ftpFile.getName(), outputStream);
+                }
             }
         } catch (IOException e) {
-            log.debug("[FtpUtil]-batchDownloadFile download fail ,{}", e);
-            closeConnect(ftpClient);
-            return false;
+            log.error("ftp batch download files fail !!!", e);
+            throw new RuntimeException("ftp batch download files fail !!!");
         }
-        return true;
     }
 
 
     /**
      * 上传单个文件到指定目录.
      *
-     * @param ftpClient  the ftp client
-     * @param sourcePath the source file path
-     * @param fileName   the source file name
-     * @param destPath   the dest path
+     * @param ftpClient the ftp client
+     * @param srcPath   the source file path
+     * @param fileName  the source file name
+     * @param destPath  the dest path
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static boolean uploadFile(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
-        String sourceFilePath = sourcePath + "/" + fileName;
+    public static void upload(FTPClient ftpClient, String srcPath, String fileName, String destPath) {
+        String sourceFilePath = srcPath + File.separator + fileName;
         File file = new File(sourceFilePath);
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             ftpClient.setBufferSize(BUFFER_SIZE);
             ftpClient.setControlEncoding(CHARSET_UTF8);
-            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-            ftpClient.enterLocalPassiveMode();
-
-            if (!ftpClient.changeWorkingDirectory(destPath)) {
-                log.debug("[FtpUtil] uploadFile : {}目录不存在，请创建一下", destPath);
-            }
+            enterDir(ftpClient, destPath);
+            checkDirExist(srcPath);
             ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset), fileInputStream);
-        } catch (FileNotFoundException e) {
-            log.debug("[FtpUtil] uploadFile : not found local file ::: {}", sourceFilePath);
-            closeConnect(ftpClient);
         } catch (IOException e) {
-            log.debug("[FtpUtil] uploadFile : fileOutputStream error  ::: {}", e);
-            closeConnect(ftpClient);
+            log.error("ftp upload file fail !!!", e);
+            throw new RuntimeException("ftp upload file fail !!!");
         }
-        return true;
     }
 
 
     /**
      * 目录A所有文件上传到FTP目录B.
      *
-     * @param ftpClient  the ftp client
-     * @param sourcePath the source path
-     * @param destPath   the dest path
+     * @param ftpClient the ftp client
+     * @param srcPath   the source path
+     * @param destPath  the dest path
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static void batchUploadFile(FTPClient ftpClient, String sourcePath, String destPath) {
+    public static void batchUpload(FTPClient ftpClient, String srcPath, String destPath) {
         try {
             ftpClient.setBufferSize(BUFFER_SIZE);
             ftpClient.setControlEncoding(CHARSET_UTF8);
-            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
-
-            if (!ftpClient.changeWorkingDirectory(destPath)) {
-                log.debug("[FtpUtil] uploadFile : 目录不存在，请创建一下");
-            }
-
+            enterDir(ftpClient, destPath);
+            checkDirExist(srcPath);
             //读取源路径
-            File file = new File(sourcePath);
+            File file = new File(srcPath);
             //获取下面所有文件（不递归）
             File[] files = file.listFiles();
             for (File sourceFile : files) {
-                try(FileInputStream fileInputStream = new FileInputStream(sourceFile)){
+                try (FileInputStream fileInputStream = new FileInputStream(sourceFile)) {
                     ftpClient.storeFile(new String(destPath.getBytes(localCharset), serverCharset), fileInputStream);
                 }
             }
         } catch (IOException e) {
-            log.error("[FtpUtil] batchUploadFile : fileIntputStream close fail");
-            closeConnect(ftpClient);
+            log.error("ftp batch upload files fail !!!", e);
+            throw new RuntimeException("ftp batch upload files fail !!!");
         }
     }
 
@@ -208,58 +171,68 @@ public class FtpUtil {
      * @param ftpClient the ftp client
      * @param destPath  the dest path
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static void deleteFiles(FTPClient ftpClient, String destPath) {
-
-        //设置被动模式
-        ftpClient.enterLocalPassiveMode();
-
+    public static void batchDelete(FTPClient ftpClient, String destPath) {
         try {
+            enterDir(ftpClient,destPath);
+
             String[] fileNames = ftpClient.listNames(destPath);
 
-            if (null == fileNames || fileNames.length == 0) {
-                log.debug("[FtpUtil]-deleteFiles {} 目录下没有文件", destPath);
+            for (String fileName : fileNames) {
+                String destFilePath = destPath + File.separator + fileName;
+                ftpClient.deleteFile(destFilePath);
             }
-            for (String ftpFile : fileNames) {
-                ftpClient.deleteFile(ftpFile);
-            }
+
         } catch (IOException e) {
-            log.debug("[FtpUtil]-deleteFiles 删除文件失败，{}", e);
+            log.debug("ftp batch delete files fail !!!", e);
+            throw new RuntimeException("ftp batch delete files fail !!!");
         }
     }
 
+    /**
+     * 删除FTP文件
+     * @param ftpClient
+     * @param destPath
+     * @param fileName
+     */
+    public static void delete(FTPClient ftpClient,String destPath,String fileName){
+        try {
+            enterDir(ftpClient,destPath);
+
+            String destFilePath = destPath + File.separator + fileName;
+
+            ftpClient.deleteFile(destFilePath);
+
+        } catch (IOException e) {
+            log.error("ftp delete file fail !!!", e);
+            throw new RuntimeException("ftp delete file fail !!!");
+        }
+    }
 
     /**
      * 批量移动FTP服务器目录A的所有文件到目录B下.
      *
      * @param ftpClient  the ftp client
-     * @param sourcePath the source path
+     * @param srcPath the source path
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static void batchMoveFileToDir(FTPClient ftpClient, String sourcePath, String destPath) {
+    public static void batchMove(FTPClient ftpClient, String srcPath, String destPath) {
         try {
-            if (!ftpClient.changeWorkingDirectory(sourcePath)) {
-                log.info("[FtpUtil] {} 该目录不存在", sourcePath);
-                return;
-            }
+            enterDir(ftpClient,destPath);
             String[] ftpFiles = ftpClient.listNames();
-            if (null == ftpFiles || ftpFiles.length == 0) {
-                log.debug("[FtpUtil]-monveFileToDir {} 目录下没有文件", destPath);
-                return;
-            }
             //批量移动文件到目标目录
             for (String ftpFile : ftpFiles) {
                 String ftpFileName = new String(ftpFile.getBytes(serverCharset), localCharset);
-                String srcFilePath = sourcePath + "/" + ftpFileName;
-                String destFilePath = destPath + "/" + ftpFileName;
+                String srcFilePath = srcPath + File.separator + ftpFileName;
+                String destFilePath = destPath + File.separator + ftpFileName;
                 ftpClient.rename(srcFilePath, destFilePath);
             }
         } catch (IOException e) {
-            log.error("[FtpUtil]-monveFileToDir  查询文件夹{}失败", sourcePath, e);
-            closeConnect(ftpClient);
+            log.error("ftp batch move files from {} to {} fail !!!", srcPath,destPath, e);
+            throw new RuntimeException("ftp batch move file fail !!!");
         }
     }
 
@@ -268,34 +241,26 @@ public class FtpUtil {
      * 移动FTP服务器目录单个到目录B下.
      *
      * @param ftpClient  the ftp client
-     * @param sourcePath the source path
+     * @param srcPath the source path
      * @param destPath   the dest path
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
-    public static void moveFileToDir(FTPClient ftpClient, String sourcePath, String fileName, String destPath) {
+    public static void move(FTPClient ftpClient, String srcPath, String fileName, String destPath) {
         try {
-            if (!ftpClient.changeWorkingDirectory(sourcePath)) {
-                log.info("[FtpUtil] {} 该目录不存在", sourcePath);
-                return;
-            }
             String[] ftpFiles = ftpClient.listNames();
-            if (null == ftpFiles || ftpFiles.length == 0) {
-                log.debug("[FtpUtil]-monveFileToDir {} 目录下没有文件", destPath);
-                return;
-            }
             //批量移动文件到目标目录
             for (String ftpFile : ftpFiles) {
                 String ftpFileName = new String(ftpFile.getBytes(serverCharset), localCharset);
                 if (ftpFileName.equals(fileName)) {
-                    String srcFilePath = sourcePath + "/" + ftpFileName;
-                    String destFilePath = destPath + "/" + ftpFileName;
+                    String srcFilePath = srcPath + File.separator+ ftpFileName;
+                    String destFilePath = destPath + File.separator + ftpFileName;
                     ftpClient.rename(srcFilePath, destFilePath);
                 }
             }
         } catch (IOException e) {
-            log.error("[FtpUtil]-monveFileToDir  查询文件夹{}失败", sourcePath, e);
-            closeConnect(ftpClient);
+            log.error("ftp move files fail !!!", srcPath, e);
+            throw new RuntimeException("ftp move files fail !!!");
         }
     }
 
@@ -308,25 +273,29 @@ public class FtpUtil {
      * @param password the password
      * @return the ftp client
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project
      */
     public static FTPClient login(String host, Integer port, String userName, String password) {
+        FTPClient ftpClient = new FTPClient();
         try {
-            FTPClient ftpClient = new FTPClient();
             ftpClient.connect(host, port);
             ftpClient.login(userName, password);
-            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
             int replyCode = ftpClient.getReplyCode();
             if (FTPReply.isPositivePreliminary(replyCode)) {
-                closeConnect(ftpClient);
-                log.info("[FtpUtil] ftp connect fail ");
+                log.error("FTP connect fail  ");
+                close(ftpClient);
+                throw new RuntimeException("FTP connect fail");
             }
+            // 设置文件下载为二进制模式
+            ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);
+            //设置编码
             setEncode(ftpClient);
-            return ftpClient;
-        } catch (Exception e) {
-            log.info("[FtpUtil] ftp login fail ");
-            throw new RuntimeException("[FtpUtil] FTPClient 获取为空 ");
+            ftpClient.enterLocalPassiveMode();  // 设置被动模式，开通一个端口来传输数据
+        } catch (IOException e) {
+            log.error("FTP login fail ", e);
+            throw new RuntimeException("FTP login fail");
         }
+        return ftpClient;
     }
 
 
@@ -334,19 +303,49 @@ public class FtpUtil {
      * 关闭连接.
      *
      * @author : Hu weihui
-     * @since nile -cmszbs-szcst 0.1.0
+     * @since hui-project 0.1.0
      */
-    public static void closeConnect(FTPClient ftpClient) {
+    public static void close(FTPClient ftpClient) {
         if (ftpClient != null && ftpClient.isConnected()) {
             try {
                 ftpClient.logout();
                 ftpClient.disconnect();
             } catch (IOException e) {
-                log.info("[FtpUtil] close ftp connecte fail {} ", e);
+                log.error("ftp client close fail !!!", e);
             }
         }
     }
 
+
+    /**
+     * 检查文件夹是否存在并创建
+     *
+     * @param destPath
+     * @throws IOException
+     */
+    private static void checkDirExist(String destPath) throws IOException {
+        File file = new File(destPath);
+        if (!file.exists()) {
+            boolean success = file.mkdirs();
+            if (!success) {
+                throw new IOException("cannot to make dir for local");
+            }
+        }
+    }
+
+    /**
+     * FTP 进入文件夹
+     *
+     * @param ftpClient
+     * @param dirPath
+     * @throws IOException
+     */
+    private static void enterDir(FTPClient ftpClient, String dirPath) throws IOException {
+        if (!ftpClient.changeWorkingDirectory(dirPath)) {
+            log.error("{} is not exist", dirPath);
+            throw new RuntimeException("FTP download file fail !!!");
+        }
+    }
 
     /**
      * 设置编码.
@@ -355,15 +354,10 @@ public class FtpUtil {
      * @author : Hu weihui
      * @since nile -szcst 0.1.0
      */
-    private static void setEncode(FTPClient ftpClient) {
-        try {
-            if (FTPReply.isPositiveCompletion(ftpClient.sendCommand(OPTS_UTF8, "ON"))) {
-                localCharset = CHARSET_UTF8;
-            }
-        } catch (IOException e) {
-            log.info("[FtpUtil] cannot to set encode UTF-8");
+    private static void setEncode(FTPClient ftpClient) throws IOException {
+        final String ON = "ON";
+        if (FTPReply.isPositiveCompletion(ftpClient.sendCommand(OPTS_UTF8, ON))) {
+            localCharset = CHARSET_UTF8;
         }
-
     }
-
 }
