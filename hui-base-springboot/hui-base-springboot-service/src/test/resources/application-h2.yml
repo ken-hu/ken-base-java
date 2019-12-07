@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    platform: h2
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:;DB_CLOSE_DELAY=-1;MODE=postgreSQL;DATABASE_TO_UPPER=FALSE
+    schema: classpath:tables_init.sql
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

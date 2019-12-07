@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 引入 application.properties -->
+    <!--<properties resource="application.properties" />-->
+
+    <!-- MyBatis3Simple：不生成 Example相关类及方法 -->
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!-- 生成的Java文件的编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <!-- 格式化java代码-->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <!-- 生成 JavaBean 对象重写 toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 生成 JavaBean 对象继承 Serializable 类 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <!--批量更新-->
+        <plugin type="com.hui.mybatis.plugins.BaseBatchOperatorPlugin">
+        </plugin>
+
+        <!--覆盖mapper.xml原文件-->
+        <plugin type="com.hui.mybatis.plugins.OverWriteXmlPlugin"/>
+
+        <!-- 生成 JavaBean 对象重写 equals 和 hashCode 方法 -->
+        <!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
+
+        <!--去掉注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- jdbc 连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/hui-security-component?characterEncoding=UTF-8"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.hui.security.entity"
+                            targetProject="../hui-base-springboot-model/src/main/java" />
+
+        <sqlMapGenerator targetPackage="/"
+                         targetProject="src/main/resources/mapper" />
+
+        <javaClientGenerator targetPackage="com.hui.security.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER" />
+
+        <!-- Mysql 配置 -->
+        <!-- <generatedKey column="id" sqlStatement="Mysql" identity="true" /> -->
+        <!-- Oracle 配置 -->
+        <!-- <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/> -->
+
+        <!-- tableName：数据库表名，domainObjectName：生成文件名 ，schema：数据源-->
+        <!--<table tableName="user">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>-->
+
+        <table tableName="t_hui_user" domainObjectName="User"
+            enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="t_hui_role" domainObjectName="Role"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="role_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="t_hui_permission" domainObjectName="Permission"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="permission_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="t_hui_datarule" domainObjectName="DataRule"
+            enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="rule_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="t_hui_group" domainObjectName="Group"
+           enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+           enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="group_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+        <table tableName="t_hui_user_log" domainObjectName="OperatorLog"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="log_id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>
