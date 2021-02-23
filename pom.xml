@@ -18,7 +18,7 @@
         <module>hui-base-redis</module>
         <module>hui-base-elasticsearch</module>
         <module>hui-base-mq</module>
-        <module>hui-base-springboot</module>
+        <module>hui-base-algorithm</module>
     </modules>
 
     <parent>
