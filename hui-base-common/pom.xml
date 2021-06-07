@@ -20,7 +20,7 @@
         <pagehelper.version>1.2.7</pagehelper.version>
         <quartz.version>2.2.3</quartz.version>
         <fastjson.version>1.2.39</fastjson.version>
-        <logback.version>1.1.11</logback.version>
+        <logback.version>1.2.0</logback.version>
         <druid.version>1.1.10</druid.version>
         <ooxml.version>1.1</ooxml.version>
         <poi.version>3.15</poi.version>
