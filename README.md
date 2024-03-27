@@ -1,6 +1,4 @@
-# kan-java-base
-
-## 介绍
+# ken-base-java
 1. 【hui-base-common】开发/收集的一些通用组件和工具
 2. 【hui-base-design】设计模式相关例子
 3. 【hui-base-elasticsearch】 ES相关例子
@@ -10,7 +8,7 @@
 7. 【hui-base-spark】大数据spark相关
 8. 【hui-base-thread】java多线程例子
 
-## 使用说明
+## Usage
 【hui-base-common】里面有很多工具类和一些COMMON类，大多数是web相关
 1. 自动化报告
 2. 单节点的防止表单重复提交
