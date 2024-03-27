@@ -1,4 +1,4 @@
-# hui-base-java
+# kan-java-base
 
 ## 介绍
 1. 【hui-base-common】开发/收集的一些通用组件和工具
@@ -24,34 +24,3 @@
 ...
 ....
 .....etc
-
-## BLOG
-### 【hui-base-common】
-1. [POI实现动态模板构建PPT](https://ithuhui.com/2018/10/24/common-poi-dynamic-ppt-build/)
-2. [Postgresql数据导入&导出工具类](https://ithuhui.com/2018/12/20/common-postgresql-import-export-util/)
-3. [springboot-aop-日志记录](https://ithuhui.com/2018/12/14/springboot-aop-log/)
-4. [springboot-aop-实现日期类型转换](https://ithuhui.com/2018/12/04/springboot-aop-datecoverter/)
-5. [springboot-防止表单重复提交(单节点&前后端分离)](https://ithuhui.com/2018/12/04/springboot-avoid-duplicate-submit/)
-
-
-### 【hui-base-hadoop】
- 1. [Hadoop-HDFS-JavaAPI手册](https://ithuhui.com/2018/11/07/hadoop-hdfs-common-java-api/)
- 2. [Hadoop完全分布式集群搭建](https://ithuhui.com/2018/11/11/hadoop-cluster-build/)
- 3. [Hadoop-Hive-环境搭建](https://ithuhui.com/2018/11/18/hadoop-hive-build/)
- 4. [Hadoop-Hive-JavaAPI手册](https://ithuhui.com/2018/11/19/hadoop-hive-common-java-api/)
- 5. [Impala-JDBC-数据导入](https://ithuhui.com/2019/07/03/bigdata-impala-jdbc-1/)
- 6. [Impala-JDBC-数据导入-集成kerberos认证](https://ithuhui.com/2019/07/04/bigdata-impala-jdbc-2-kerberos/)
- 
-### 【hui-base-spark】
- 1. [spark-rdd-JavaAPI手册](https://ithuhui.com/2018/11/10/spark-rdd-common-java-api/)
- 2. [spark-sql-保存结果集到mysql](https://ithuhui.com/2018/11/11/spark-sql-save-to-mysql/)
- 
-### 【hui-base-redis】 
- 1. [redis集群搭建](https://ithuhui.com/2018/11/03/redis-cluster-build/)
- 
- 
-## Author
-```
- 作者：HuHui
- 转载：欢迎一起讨论web和大数据问题,转载请注明作者和原文链接，感谢
-```
